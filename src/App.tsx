@@ -40,12 +40,19 @@ export default function App() {
           <Route path="locator" element={<StoreLocator />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<RootLayout />}>
-          <Route index element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          } />
+        <Route path="/admin" element={
+          <ProtectedRoute>
+            <RootLayout />
+          </ProtectedRoute>
+        }>
+          <Route index element={<Dashboard />} />
+        </Route>
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <RootLayout />
+          </ProtectedRoute>
+        }>
+          <Route index element={<Dashboard />} />
         </Route>
       </Routes>
     </Router>
