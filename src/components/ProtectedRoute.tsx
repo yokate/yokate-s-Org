@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
-export default function ProtectedRoute({ children }: { children: JSX.Element }) {
+export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [session, setSession] = useState<any>(null);
 
@@ -19,5 +19,5 @@ export default function ProtectedRoute({ children }: { children: JSX.Element }) 
     return <Navigate to="/login" replace />;
   }
 
-  return children;
+  return <>{children}</>;
 }
