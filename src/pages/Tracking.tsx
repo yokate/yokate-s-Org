@@ -149,9 +149,12 @@ export default function Tracking() {
                       <span className="text-xs uppercase tracking-widest text-slate-400 font-bold block mb-1">Total Biaya</span>
                       <span className="text-3xl font-extrabold text-slate-900">Rp {order.total_price.toLocaleString('id-ID')}</span>
                     </div>
-                    <span className="text-secondary font-bold flex items-center gap-1 bg-secondary-container/30 px-3 py-1 rounded-full">
+                    <span className={cn(
+                      "font-bold flex items-center gap-1 px-3 py-1 rounded-full text-xs",
+                      order.payment_status === 'Paid' ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                    )}>
                       <CheckCircle className="w-4 h-4" /> 
-                      Lunas
+                      {order.payment_status === 'Paid' ? 'Dibayar' : 'Belum Dibayar'}
                     </span>
                   </div>
                 </div>
