@@ -10,9 +10,11 @@ export default function Login() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Login - attempt:', { username, password });
     // Simplified mock login
     if (username === 'admin' && password === 'admin') {
       localStorage.setItem('isAdmin', 'true');
+      console.log('Login - success, redirecting to /admin');
       navigate('/admin');
     } else {
       alert('Username atau password salah.');

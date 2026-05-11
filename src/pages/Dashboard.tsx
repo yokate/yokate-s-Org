@@ -3,7 +3,6 @@ import { Search, Filter, ChevronLeft, ChevronRight, Loader2, RefreshCw, Phone, M
 import { motion } from 'motion/react';
 import { supabase, type Order } from '../lib/supabase';
 import { cn } from '../lib/utils';
-import SqlEditor from '../components/SqlEditor';
 
 export default function Dashboard() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -249,8 +248,6 @@ export default function Dashboard() {
           </div>
         </div>
       </section>
-      
-      <SqlEditor />
     </div>
   );
 }

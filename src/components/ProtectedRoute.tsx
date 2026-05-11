@@ -8,6 +8,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
 
   useEffect(() => {
     const adminStatus = localStorage.getItem('isAdmin');
+    console.log('ProtectedRoute - adminStatus:', adminStatus);
     setIsAuthenticated(adminStatus === 'true');
     setLoading(false);
   }, []);
