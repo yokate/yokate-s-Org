@@ -72,19 +72,6 @@ export default function Dashboard() {
     }
   };
 
-  const updatePaymentStatus = async (id: string, newPaymentStatus: string) => {
-    try {
-      const { error } = await supabase
-        .from('orders')
-        .update({ payment_status: newPaymentStatus })
-        .eq('id', id);
-      if (error) throw error;
-      fetchOrders();
-    } catch (err) {
-      alert('Gagal memperbarui status pembayaran.');
-    }
-  };
-
   const filteredOrders = orders.filter(order => 
     order.customer_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     order.order_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
