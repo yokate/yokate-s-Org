@@ -4,7 +4,7 @@ import { MapPin, Navigation } from 'lucide-react';
 export default function StoreLocator() {
   const stores = [
     {
-      name: "Shoenitarian Central Workshop",
+      name: "Shoenitarian Location",
       address: "Jl Ganggeng XIV no. 152B, Sungai Bambu, Tanjung Priok, Jakarta Utara",
       phone: "0857-1596-7156",
       hours: "09:00 - 24:00",
