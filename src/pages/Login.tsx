@@ -2,24 +2,19 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogIn, Lock, User, Verified, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
-import { supabase } from '../lib/supabase';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: username, // Treating username as email
-        password: password,
-      });
-      if (error) throw error;
+    // Simplified mock login
+    if (username === 'admin' && password === 'admin') {
       navigate('/admin');
-    } catch (err: any) {
-      alert(err.message || 'Gagal login.');
+    } else {
+      alert('Username atau password salah.');
     }
   };
 
@@ -57,16 +52,16 @@ export default function Login() {
         {/* Form */}
         <form onSubmit={handleLogin} className="p-8 space-y-6">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block" htmlFor="email">Email</label>
+            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block" htmlFor="username">Nama Pengguna</label>
             <div className="relative">
               <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
               <input 
-                id="email"
-                type="email"
+                id="username"
+                type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium"
-                placeholder="admin@shoenitarian.com" 
+                placeholder="Admin username" 
                 required
               />
             </div>
