@@ -12,6 +12,7 @@ export default function Login() {
     e.preventDefault();
     // Simplified mock login
     if (username === 'admin' && password === 'admin') {
+      localStorage.setItem('isAdmin', 'true');
       navigate('/admin');
     } else {
       alert('Username atau password salah.');

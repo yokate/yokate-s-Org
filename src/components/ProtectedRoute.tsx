@@ -3,19 +3,18 @@ import { Navigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [session, setSession] = useState<any>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setLoading(false);
-    });
+    const adminStatus = localStorage.getItem('isAdmin');
+    setIsAuthenticated(adminStatus === 'true');
+    setLoading(false);
   }, []);
 
-  if (loading) return <div>Loading...</div>; // TODO: Add a nice loader
+  if (loading) return <div>Loading...</div>;
 
-  if (!session) {
+  if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
