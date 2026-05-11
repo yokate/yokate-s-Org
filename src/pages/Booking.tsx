@@ -108,7 +108,10 @@ export default function Booking() {
       setSuccess(true);
     } catch (err: any) {
       console.error('Error submitting order:', err);
-      alert(err.message || 'Gagal mengirim pesanan. Pastikan bucket "payment-proofs" sudah dibuat di Supabase Storage.');
+      const errorMessage = typeof err === 'object' && err !== null 
+        ? (err.message || JSON.stringify(err))
+        : String(err);
+      alert('Gagal mengirim pesanan: ' + errorMessage);
     } finally {
       setLoading(false);
     }
