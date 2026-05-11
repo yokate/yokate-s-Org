@@ -98,7 +98,8 @@ export default function Booking() {
             order_number: generatedOrderNumber,
             status: 'Pending',
             total_price: currentPrice,
-            payment_proof_url: proofUrl
+            payment_proof_url: proofUrl,
+            payment_status: 'Unpaid'
           }
         ]);
 

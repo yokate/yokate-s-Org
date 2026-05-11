@@ -59,6 +59,32 @@ export default function Dashboard() {
     }
   };
 
+  const updatePaymentStatus = async (id: string, newPaymentStatus: string) => {
+    try {
+      const { error } = await supabase
+        .from('orders')
+        .update({ payment_status: newPaymentStatus })
+        .eq('id', id);
+      if (error) throw error;
+      fetchOrders();
+    } catch (err) {
+      alert('Gagal memperbarui status pembayaran.');
+    }
+  };
+
+  const updatePaymentStatus = async (id: string, newPaymentStatus: string) => {
+    try {
+      const { error } = await supabase
+        .from('orders')
+        .update({ payment_status: newPaymentStatus })
+        .eq('id', id);
+      if (error) throw error;
+      fetchOrders();
+    } catch (err) {
+      alert('Gagal memperbarui status pembayaran.');
+    }
+  };
+
   const filteredOrders = orders.filter(order => 
     order.customer_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     order.order_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -163,6 +189,7 @@ export default function Dashboard() {
                   <th className="px-8 py-5">Layanan & Detail</th>
                   <th className="px-8 py-5">Bukti Bayar</th>
                   <th className="px-8 py-5">Status & Update</th>
+                  <th className="px-8 py-5">Status Pembayaran</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
@@ -227,6 +254,19 @@ export default function Dashboard() {
                         <option value="Drying">Dijemur</option>
                         <option value="Ready">Selesai</option>
                         <option value="Completed">Diambil</option>
+                      </select>
+                    </td>
+                    <td className="px-8 py-6">
+                      <select 
+                        value={order.payment_status || 'Unpaid'}
+                        onChange={(e) => updatePaymentStatus(order.id, e.target.value)}
+                        className={cn(
+                          "text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl border border-transparent outline-none transition-all cursor-pointer shadow-sm",
+                          order.payment_status === 'Paid' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                        )}
+                      >
+                        <option value="Unpaid">Belum Dibayar</option>
+                        <option value="Paid">Dibayar</option>
                       </select>
                     </td>
                   </tr>

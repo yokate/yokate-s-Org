@@ -33,5 +33,6 @@ export type Order = {
   status: 'Pending' | 'Cleaning' | 'Drying' | 'Ready' | 'Completed';
   total_price: number;
   payment_proof_url: string;
+  payment_status: 'Paid' | 'Unpaid';
   created_at: string;
 };
