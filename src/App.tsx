@@ -6,6 +6,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import RootLayout from './components/RootLayout';
+import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
 import Tracking from './pages/Tracking';
 import Booking from './pages/Booking';
@@ -40,7 +41,11 @@ export default function App() {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<RootLayout />}>
-          <Route index element={<Dashboard />} />
+          <Route index element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
         </Route>
       </Routes>
     </Router>

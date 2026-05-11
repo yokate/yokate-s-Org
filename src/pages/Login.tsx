@@ -2,17 +2,24 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogIn, Lock, User, Verified, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { supabase } from '../lib/supabase';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple mock login for demo
-    if (username === 'admin' && password === 'admin') {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: username, // Treating username as email
+        password: password,
+      });
+      if (error) throw error;
       navigate('/admin');
+    } catch (err: any) {
+      alert(err.message || 'Gagal login.');
     }
   };
 
