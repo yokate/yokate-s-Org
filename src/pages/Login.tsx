@@ -12,7 +12,7 @@ export default function Login() {
     e.preventDefault();
     console.log('Login - attempt:', { username, password });
     // Simplified mock login
-    if (username === 'admin' && password === 'admin') {
+    if (username === 'shoenitarian' && password === 'SHOENITARIAN') {
       localStorage.setItem('isAdmin', 'true');
       console.log('Login - success, redirecting to /admin');
       navigate('/admin');
