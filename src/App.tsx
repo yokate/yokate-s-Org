@@ -5,6 +5,7 @@
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import RootLayout from './components/RootLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
@@ -55,6 +56,7 @@ export default function App() {
           <Route index element={<Dashboard />} />
         </Route>
       </Routes>
+      <SpeedInsights />
     </Router>
   );
 }
