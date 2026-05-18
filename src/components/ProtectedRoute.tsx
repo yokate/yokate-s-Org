@@ -7,10 +7,18 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const adminStatus = localStorage.getItem('isAdmin');
-    console.log('ProtectedRoute - adminStatus:', adminStatus);
-    setIsAuthenticated(adminStatus === 'true');
-    setLoading(false);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAuthenticated(!!session);
+      setLoading(false);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(!!session);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   if (loading) return <div>Loading...</div>;

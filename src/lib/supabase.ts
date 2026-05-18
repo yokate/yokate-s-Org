@@ -22,6 +22,11 @@ export const supabase = (() => {
   return supabaseInstance;
 })() as SupabaseClient;
 
+export const logout = async () => {
+  await supabase.auth.signOut();
+  localStorage.removeItem('isAdmin');
+};
+
 export type Order = {
   id: string;
   order_number: string;

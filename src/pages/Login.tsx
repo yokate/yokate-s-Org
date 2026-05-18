@@ -2,22 +2,29 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogIn, Lock, User, Verified, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { supabase } from '../lib/supabase';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login - attempt:', { username, password });
-    // Simplified mock login
-    if (username === 'shoenitarian' && password === 'SHOENITARIAN') {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: username, // Assuming username is email here
+        password: password
+      });
+
+      if (error) throw error;
+      
+      console.log('Login - success', data);
       localStorage.setItem('isAdmin', 'true');
-      console.log('Login - success, redirecting to /admin');
       navigate('/admin');
-    } else {
-      alert('Username atau password salah.');
+    } catch (error) {
+      console.error('Error logging in:', error);
+      alert('Login gagal. Periksa email dan password.');
     }
   };
 
