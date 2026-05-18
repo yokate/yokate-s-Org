@@ -10,10 +10,13 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Login attempt:', { username, password });
     if (username.trim().toLowerCase() === 'shoenitarian' && password === 'SHOENITARIAN') {
+      console.log('Login successful');
       localStorage.setItem('isAdmin', 'true');
       navigate('/admin');
     } else {
+      console.log('Login failed');
       alert('Username atau password salah.');
     }
   };
