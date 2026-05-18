@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Menu, X, LogOut } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
-import { supabase, logout } from '../lib/supabase';
 
 export default function Header() {
   const location = useLocation();
@@ -14,21 +13,12 @@ export default function Header() {
   const isAdmin = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setIsLoggedIn(!!session);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsLoggedIn(!!session);
-    });
-
-    return () => subscription.unsubscribe();
+    const adminStatus = localStorage.getItem('isAdmin');
+    setIsLoggedIn(adminStatus === 'true');
   }, []);
 
   const handleLogout = async () => {
-    await logout();
+    localStorage.removeItem('isAdmin');
     setIsLoggedIn(false);
     navigate('/login');
   };

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogIn, Lock, User, Verified, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
-import { supabase } from '../lib/supabase';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -11,20 +10,11 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: username, // Assuming username is email here
-        password: password
-      });
-
-      if (error) throw error;
-      
-      console.log('Login - success', data);
+    if (username === 'shoenitarian' && password === 'SHOENITARIAN') {
       localStorage.setItem('isAdmin', 'true');
       navigate('/admin');
-    } catch (error) {
-      console.error('Error logging in:', error);
-      alert('Login gagal. Periksa email dan password.');
+    } else {
+      alert('Username atau password salah.');
     }
   };
 
@@ -71,7 +61,7 @@ export default function Login() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all font-medium"
-                placeholder="Admin username" 
+                placeholder="USERNAME" 
                 required
               />
             </div>
