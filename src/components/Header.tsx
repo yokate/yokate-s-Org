@@ -63,7 +63,7 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          {isLoggedIn && (
+          {isLoggedIn && isAdmin && (
             <button onClick={handleLogout} className="text-slate-500 hover:text-red-500 flex items-center gap-2">
               <LogOut className="w-4 h-4" />
               Keluar
