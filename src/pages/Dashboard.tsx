@@ -60,7 +60,7 @@ export default function Dashboard() {
         .update({ status: newStatus })
         .eq('id', id);
       if (error) throw error;
-      fetchOrders();
+      await fetchOrders();
     } catch (err) {
       alert('Gagal memperbarui status.');
     }
@@ -73,7 +73,7 @@ export default function Dashboard() {
         .update({ payment_status: newPaymentStatus })
         .eq('id', id);
       if (error) throw error;
-      fetchOrders();
+      await fetchOrders();
     } catch (err) {
       alert('Gagal memperbarui status pembayaran.');
     }
