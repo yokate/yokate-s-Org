@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Search, Filter, ChevronLeft, ChevronRight, Loader2, RefreshCw, Phone, MessageSquare, ExternalLink, Image as ImageIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Search, Filter, ChevronLeft, ChevronRight, Loader2, RefreshCw, Phone, MessageSquare, ExternalLink, Image as ImageIcon, LogOut } from 'lucide-react';
 import { motion } from 'motion/react';
 import { supabase, type Order } from '../lib/supabase';
 import { cn } from '../lib/utils';
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,6 +15,11 @@ export default function Dashboard() {
     pending: 0,
     completedToday: 0
   });
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAdmin');
+    navigate('/login');
+  };
 
   const fetchOrders = async () => {
     setLoading(true);
@@ -112,6 +119,13 @@ export default function Dashboard() {
             title="Muat Ulang"
           >
             <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin text-primary' : ''}`} />
+          </button>
+          <button 
+            onClick={handleLogout}
+            className="p-3 bg-white border border-slate-200 rounded-xl hover:bg-red-50 transition-all text-slate-400 hover:text-red-500 shadow-sm"
+            title="Keluar"
+          >
+            <LogOut className="w-5 h-5" />
           </button>
         </div>
       </div>
