@@ -138,10 +138,11 @@ export default function Dashboard() {
           </button>
           <button 
             onClick={handleLogout}
-            className="p-3 bg-white border border-slate-200 rounded-xl hover:bg-red-50 transition-all text-slate-400 hover:text-red-500 shadow-sm"
+            className="flex items-center gap-2 px-4 py-3 bg-red-50 border border-red-100 rounded-xl hover:bg-red-100 transition-all text-red-500 font-bold shadow-sm"
             title="Keluar"
           >
             <LogOut className="w-5 h-5" />
+            <span>Keluar</span>
           </button>
         </div>
       </div>
