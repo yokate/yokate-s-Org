@@ -30,6 +30,7 @@ export default function Footer() {
           <Link className="text-xs font-bold text-slate-400 hover:text-primary transition-colors uppercase tracking-widest" to="/terms">Terms of Service</Link>
           <Link className="text-xs font-bold text-slate-400 hover:text-primary transition-colors uppercase tracking-widest" to="/support">Contact Support</Link>
           <Link className="text-xs font-bold text-slate-400 hover:text-primary transition-colors uppercase tracking-widest" to="/locator">Store Locator</Link>
+          <Link className="text-xs font-bold text-slate-400 hover:text-primary transition-colors uppercase tracking-widest" to="/login">Admin Login</Link>
         </div>
         
         <div className="flex items-center gap-6">
