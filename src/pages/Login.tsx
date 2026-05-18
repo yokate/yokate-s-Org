@@ -10,7 +10,7 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === 'shoenitarian' && password === 'SHOENITARIAN') {
+    if (username.trim().toLowerCase() === 'shoenitarian' && password === 'SHOENITARIAN') {
       localStorage.setItem('isAdmin', 'true');
       navigate('/admin');
     } else {
